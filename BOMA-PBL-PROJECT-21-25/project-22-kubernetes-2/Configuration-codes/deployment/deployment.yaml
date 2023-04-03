@@ -1,0 +1,26 @@
+# Section 1 - This is the part that defines the deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    tier: frontend
+
+# Section 2 - This is the Replica set layer controlled by the deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: frontend
+
+# Section 3 - This is the Pod section controlled by the deployment and selected by the replica set in section 2.
+  template:
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80

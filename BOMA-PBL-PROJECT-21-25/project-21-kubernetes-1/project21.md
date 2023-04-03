@@ -2285,7 +2285,7 @@ EOF
 ```
 Now you should have the worker nodes joined to the cluster, and in a READY state.
 
-![Kube-proxy-running](Images/kubeconfig-kube-proxy.png)
+![Kube-proxy-running](Images/kube-proxy-running.png)
 
 ![Final-result](Images/final-result-project21.png)
 

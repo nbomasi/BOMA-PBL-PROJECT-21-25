@@ -12,3 +12,5 @@ nodeGroups:
     volumeSize: 40
     ssh:
       allow: true # will use ~/.ssh/id_rsa.pub as the default ssh key
+
+# eksctl create cluster -f boma-eks-cluster.yaml

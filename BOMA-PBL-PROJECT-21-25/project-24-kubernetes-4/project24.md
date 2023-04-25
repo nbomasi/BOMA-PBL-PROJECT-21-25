@@ -897,6 +897,8 @@ I got the message that I got 2 commits ahead of the origin main. Then I ran the 
 
 After running the command, then I added and pushed again. note the number 2 attach to HEAD determined the number of commit 
 
+[Credit](https://gist.github.com/duttashi/1011d1b52e3cc288df402807c1b20521)
+
 #### End of project 24
 
 

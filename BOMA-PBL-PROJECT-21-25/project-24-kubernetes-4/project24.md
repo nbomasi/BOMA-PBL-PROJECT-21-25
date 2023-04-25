@@ -882,6 +882,23 @@ helm install boma-search elastic/eck-operator -n elastic-system --kubeconfig kub
 
 ![All pods ](Images/all-installed2.png)
 
+**Challenge faced during GITPUSH:**
+
+I mistatenkely included .terraform folder, after that I kept getting error of LARGE FILE above 100 mb
+I deleted the folder, spend lot of time to no avail. 
+
+**Final solution:** I ran:
+
+```$ git status```
+
+I got the message that I got 2 commits ahead of the origin main. Then I ran the following command and that was the end of the issue
+
+ `git reset HEAD~2`
+
+After running the command, then I added and pushed again. note the number 2 attach to HEAD determined the number of commit 
+
+#### End of project 24
+
 
 
 

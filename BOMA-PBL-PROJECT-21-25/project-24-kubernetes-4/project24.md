@@ -882,7 +882,8 @@ helm install boma-search elastic/eck-operator -n elastic-system --kubeconfig kub
 
 ![All pods ](Images/all-installed2.png)
 
-**Challenge faced during GITPUSH:**
+
+### Challenge faced during GITPUSH:
 
 I mistatenkely included .terraform folder, after that I kept getting error of LARGE FILE above 100 mb
 I deleted the folder, spend lot of time to no avail. 
@@ -899,7 +900,7 @@ After running the command, then I added and pushed again. note the number 2 atta
 
 [Credit](https://gist.github.com/duttashi/1011d1b52e3cc288df402807c1b20521)
 
-#### End of project 24
+### End of project 24
 
 
 

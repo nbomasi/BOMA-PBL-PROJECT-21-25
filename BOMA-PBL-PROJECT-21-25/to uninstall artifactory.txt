@@ -1,0 +1,7 @@
+to uninstall artifactory
+
+$helm ls - to check release name
+
+&helm history release_name -- to get list of release version
+
+$kubectl config set-context --current --namespace=<your-namespace> - to set namespace 

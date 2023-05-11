@@ -1,0 +1,52 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cloud.google.com/neg: '{"ingress":true}'
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{"cloud.google.com/neg":"{\"ingress\":true}","meta.helm.sh/release-name":"artifactory","meta.helm.sh/release-namespace":"tools"},"creationTimestamp":"2023-05-05T07:58:18Z","finalizers":["service.kubernetes.io/load-balancer-cleanup"],"labels":{"app":"artifactory","app.kubernetes.io/managed-by":"Helm","chart":"artifactory-107.55.10","component":"nginx","heritage":"Helm","release":"artifactory"},"name":"artifactory-artifactory-nginx","namespace":"tools","resourceVersion":"210613","uid":"025cf1d5-1c0e-46bc-adf3-012edd60afb6"},"spec":{"allocateLoadBalancerNodePorts":true,"clusterIP":"10.52.168.50","clusterIPs":["10.52.168.50"],"externalTrafficPolicy":"Cluster","internalTrafficPolicy":"Cluster","ipFamilies":["IPv4"],"ipFamilyPolicy":"SingleStack","ports":[{"name":"http","nodePort":30565,"port":80,"protocol":"TCP","targetPort":80},{"name":"https","nodePort":32642,"port":443,"protocol":"TCP","targetPort":443}],"selector":{"app":"artifactory","component":"nginx","release":"artifactory"},"sessionAffinity":"None","type":"ClusterIP"}}
+    meta.helm.sh/release-name: artifactory
+    meta.helm.sh/release-namespace: tools
+  creationTimestamp: "2023-05-05T07:58:18Z"
+  labels:
+    app: artifactory
+    app.kubernetes.io/managed-by: Helm
+    chart: artifactory-107.55.10
+    component: nginx
+    heritage: Helm
+    release: artifactory
+  name: artifactory-artifactory-nginx
+  namespace: tools
+  resourceVersion: "3103094"
+  uid: 025cf1d5-1c0e-46bc-adf3-012edd60afb6
+spec:
+  clusterIP: 10.52.168.50
+  clusterIPs:
+  - 10.52.168.50
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 443
+  selector:
+    app: artifactory
+    component: nginx
+    release: artifactory
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: 
+    ingress:
+    - ip: 34.29.47.196

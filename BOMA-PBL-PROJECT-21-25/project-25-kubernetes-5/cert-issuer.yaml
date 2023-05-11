@@ -1,0 +1,28 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  namespace: cert-manager
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: nbomasi@gmail.com
+    privateKeySecretRef:
+       name: letsencrypt-prod
+    #http01: {}
+    solvers:
+    # the following lines of code saved me from all the problem
+    - http01:
+          ingress:
+            class: nginx
+    - selector:
+       dnsZones:
+       - "bomatooling.xyz"
+    -  dns01:
+         cloudDNS:
+           project: "useful-song-384921"
+          #region: "us-centra1"ct
+          #hostedZoneID: "Z2CD4NTR2FDPZ"
+           serviceAccountSecretRef:
+             name: clouddns-dns01-solver-svc-acct
+             key: key.json

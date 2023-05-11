@@ -1,0 +1,33 @@
+Volume issue solved: https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/
+
+helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace ingress-nginx --create-namespace
+
+kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=120s
+
+Issue applying egress to actifactory:Error from server (InternalError): error when creating "artifactory-ingress.yml": Internal error occurred: failed calling webhook "validate.nginx.ingress.kubernetes.io": failed to call webhook: Post "https://ingress-nginx-controller-admission.ingress-nginx.svc:443/networking/v1/ingresses?timeout=10s": context deadline exceeded
+
+Solution:kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission (https://stackoverflow.com/questions/61616203/nginx-ingress-controller-failed-calling-webhook)
+
+
+helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.11.0 --set installCRDs=true  
+
+helm install my-release --namespace cert-manager --version v1.11.1 jetstack/cert-manager --set installCRDs=true
+
+Link to installation of cert-manager: https://cert-manager.io/docs/installation/helm/
+
+
+Link to setting up google cloud clusterissuer manifest (dnso1 challenge provider): https://cert-manager.io/docs/configuration/acme/dns01/google/
+
+
+gcloud projects add-iam-policy-binding useful-song-384921 --member serviceAccount:dns01-solver@useful-song-384921.iam.gserviceaccount.com --role roles/dns.admin
+
+
+kubectl get secrettooling.artifactory.bomatooling.xyz -o yaml
+
+The link that save me from cert not been true: https://getbetterdevops.io/k8s-ingress-with-letsencrypt/
+
+The site that solved certificate issue and page not loading issue:https://ayyazzafar.medium.com/how-to-install-letsencrypt-ssl-certificate-using-cert-manager-on-google-kubernetes-engine-gke-4553889688bc
+
+https://cloud.google.com/community/tutorials/nginx-ingress-gke
+
+https://kubernetes.github.io/ingress-nginx/user-guide/basic-usage/

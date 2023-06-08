@@ -1,0 +1,32 @@
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: mychart-configmap
+# data:
+#   myvalue: "Hello World"
+
+#Practice 2: using variable
+
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: {{ .Release.Name }}-configmap
+# data:
+#   myvalue: "Hello World"
+
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: {{ .Release.Name }}-configmap
+# data:
+#   myvalue: "Hello World"
+#   drink: {{ .Values.favoriteDrink }}
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  myvalue: "Hello World"
+  drink: {{ .Values.favorite.drink }}
+  food: {{ .Values.favorite.food }}  

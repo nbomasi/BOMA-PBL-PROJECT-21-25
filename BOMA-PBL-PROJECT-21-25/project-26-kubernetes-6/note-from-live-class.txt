@@ -1,0 +1,14 @@
+396888864
+
+kubectl log <any resource name>
+
+kubernetes ingress path type
+
+helm create <name of template>
+ Read helm template from website
+
+helm uprade
+
+helm role <version> <name of resources>
+
+helm fetch <remote chart>

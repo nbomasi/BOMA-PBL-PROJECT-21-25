@@ -1,0 +1,103 @@
+controller:
+  # Used for label app.kubernetes.io/component
+  componentName: "jenkins-controller"
+  image: "jenkins/jenkins"
+  # tag: "2.387.3-jdk11"
+  tagLabel: jdk11
+  imagePullPolicy: "Always"
+
+  ingress:
+    enabled: "true"
+    apiVersion: "extensions/v1beta1"
+
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+      kubernetes.io/ingress.class: nginx
+
+    hostName: tooling.jenkins.bomatooling.xyz
+    tls:
+      - secretName: tooling.jenkins.bomatooling.xyz
+        hosts:
+          - tooling.jenkins.bomatooling.xyz
+
+  additionalExistingSecrets:
+    - name: github
+      keyName: github_token
+  installPlugins:
+    - kubernetes:3900.va_dce992317b_4
+    - workflow-aggregator:596.v8c21c963d92d
+    - git:5.0.2
+    - configuration-as-code:1625.v27444588cc3d
+
+  # # Set to false to download the minimum required version of all dependencies.
+  # installLatestPlugins: false
+
+  # # Set to true to download latest dependencies of any plugin that is requested to have the latest version.
+  # installLatestSpecifiedPlugins: false
+
+  # List of plugins to install in addition to those listed in controller.installPlugins
+  additionalPlugins:
+    - blueocean:1.27.4
+    - credentials-binding:604.vb_64480b_c56ca_
+    - git-changelog:3.30
+    - git-client:4.2.0
+    - git-server:99.va_0826a_b_cdfa_d
+
+  JCasC:
+    defaultConfig: true
+    configUrls: []
+    # - https://acme.org/jenkins.yaml
+    # Remote URL:s for configuration files.
+    configScripts:
+      welcome-message: |
+        jenkins:
+          systemMessage: Welcome to our CI\CD server.  This Jenkins is configured and managed 'as code' PLEASES DO NOT CONFIGURE Boma jenkins.
+      # Allows adding to the top-level security JCasC section. For legacy,  default the chart includes apiToken configurations
+      pipeline: |
+        jobs:
+         - script: > 
+             folder('BOMATOOLING.XYZ') {
+               displayName('BOMATOOLING.XYZ') 
+               description('Contains BOMATOOLING.XYZ Jenkins Pipelines') 
+         }
+       #  - script: > 
+        #     multibranchPipelineJob('BOMATOOLING.XYZ/tooling-app') { 
+         #      branchSources { 
+          #       git { 
+           ##        remote('https://github.com/nbomasi/tooling.git') 
+             #      credentialsId('github') 
+             #      id('tooling-app') 
+              #     } 
+               #  } 
+               #}
+
+    security-config: |
+      credentials:
+        system:
+         domainCredentials:
+         - credentials:
+           - usernamePassword:
+              id: github
+              username: nbomasi
+              password: ${github-github_token}
+              scope: GLOBAL
+              description: Github
+  testEnabled: false
+  security:
+    apiToken:
+      creationOfLegacyTokenEnabled: false
+      tokenGenerationOnCreationEnabled: false
+      usageStatisticsEnabled: true
+    # Ignored if securityRealm is defined in controller.JCasC.configScripts
+  securityRealm: |-
+    local:
+      allowsSignup: false
+      enableCaptcha: false
+      users:
+      - id: "${chart-admin-username}"
+        name: "Jenkins Admin"
+        password: "${chart-admin-password}"
+  # Ignored if authorizationStrategy is defined in controller.JCasC.configScripts
+  authorizationStrategy: |-
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false

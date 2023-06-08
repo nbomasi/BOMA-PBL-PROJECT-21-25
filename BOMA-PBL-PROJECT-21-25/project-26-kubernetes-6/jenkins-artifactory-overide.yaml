@@ -1,0 +1,76 @@
+controller:
+  # Used for label app.kubernetes.io/component
+  componentName: "jenkins-controller"
+  image: "bomasi/boma-jenkins-plugins"
+  #repository: nbomasi/bomasi-repo
+    #repository: https://tooling.artifactory.bomatooling.xyz/bomasi/boma-jenkins-plugins
+  #tagLabel: jdk11
+  #imagePullSecretName: YWRtaW46QEVlZTA2ODAzNw==
+  imagePullSecretName: mydocker-cred2
+  #tag: "2.357-jdk11.03"
+  tag: "1.0"
+
+
+  #image: "https://tooling.artifactory.bomatooling.xyz/bomasi/boma-jenkins-plugins"
+  #tag: "2.387.3.jdk11"
+  #tagLabel: jdk11
+  #tagLabel: 1.0
+  imagePullPolicy: "Always"
+
+  ingress:
+    enabled: "true"
+    apiVersion: "extensions/v1beta1"
+
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+      kubernetes.io/ingress.class: nginx
+
+    hostName: tooling.jenkins.bomatooling.xyz
+    tls:
+      - secretName: tooling.jenkins.bomatooling.xyz
+        hosts:
+          - tooling.jenkins.bomatooling.xyz
+
+  additionalExistingSecrets:
+    - name: github
+      keyName: github_token
+  installPlugins: []
+
+  additionalPlugins: []
+    
+  JCasC:
+    configScripts:
+      welcome-message: |
+        jenkins:
+          systemMessage: Welcome to Darey.io Multi-tenant CI\CD server.  This Jenkins is configured and managed strictly 'as code'. U can update MANUALLT AT YOUR OWN RISK
+      
+      pipeline: |
+        jobs:
+         - script: > 
+             folder('BOMATOOLING.XYZ') {
+               displayName('BOMATOOLING.XYZ') 
+               description('Contains BOMATOOLING.XYZ Jenkins Pipelines') 
+         }
+         - script: > 
+             multibranchPipelineJob('BOMATOOLING.XYZ/tooling-app') { 
+               branchSources { 
+                 git { 
+                   remote('https://github.com/nbomasi/tooling.git') 
+                   credentialsId('github') 
+                   id('tooling-app') 
+                   } 
+                 } 
+               }
+
+    security-config: |
+      credentials:
+        system:
+         domainCredentials:
+         - credentials:
+           - usernamePassword:
+              id: github
+              username: nbomasi
+              password: ${github-github_token}
+              scope: GLOBAL
+              description: Github
+  testEnabled: false

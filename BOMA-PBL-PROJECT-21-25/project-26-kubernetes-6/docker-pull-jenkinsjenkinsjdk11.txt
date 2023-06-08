@@ -1,0 +1,22 @@
+docker pull jenkins/jenkins:jdk11
+
+docker tag jenkins/jenkins:jdk11 tooling.artifactory.bomatooling.xyz/jenkins/jenkins:jdk11
+docker login tooling.artifactory.bomatooling.xyz/
+
+helm install jenkins jenkins/jenkins
+
+
+kubectl exec --namespace default -it svc/jenkins -c jenkins -- /bin/cat /run/secrets/additional/chart-admin-password && echo
+
+jenkins password: cMnwCKIXROuP3IyOK3MSll
+jenkins password2:jTn7tF4Jj4eKmGAzcK9Rw2
+
+helm upgrade -i jenkins jenkinsci/jenkins-n tools -f jenkins-values-overide.yaml
+
+docker push tooling.artifactory.bomatooling.xyz/jenkins/jenkins:jdk11
+
+docker tag jenkins/jenkins:jdk11 https://tooling.artifactory.sandbox.svc.darey.io/jenkins/jenkins:jdk11
+
+Artifactory-token: cmVmdGtuOjAxOjE3MTU0ODg1Mjk6NndXOFpaV2YwRWw0dHl3Nk12Z0JiRTNBMzlj
+
+docker tag 2b22a6f3f53e tooling.artifactory.bomatooling.xyz/artifactory/boma-virtual-repo:jdk11

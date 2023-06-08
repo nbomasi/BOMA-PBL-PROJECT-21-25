@@ -1,0 +1,15 @@
+controller:
+  # Used for label app.kubernetes.io/component
+  componentName: "jenkins-controller"
+  image: "jenkins/jenkins"
+  # tag: "2.387.3-jdk11"
+  tagLabel: jdk11
+  imagePullPolicy: "Always"
+    
+  JCasC:
+    configScripts:
+      welcome-message: |
+        jenkins:
+          systemMessage: Welcome to Darey.io Multi-tenant CI\CD server.  This Jenkins is configured and managed strictly 'as code'. Please do not update Manually
+
+  # use this to apply: helm upgrade -i jenkins jenkinsci/jenkins -n tools -f jenkins-values-overide.yaml

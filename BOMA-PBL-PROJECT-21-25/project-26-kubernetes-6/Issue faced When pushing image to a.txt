@@ -1,0 +1,5 @@
+Issue faced: When pushing image to artifactory repo: error parsing HTTP 413 response body: invalid character '<' looking for beginning of value: "<html>\r\n<head><title>413 Request Entity Too Large</title></head>\r\n<body>\r\n<center><h1>413 Request Entity Too Large</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
+
+Solution: Link (https://github.com/nginxinc/kubernetes-ingress/issues/21)
+
+docker build -t jenkins-plugins:tag .

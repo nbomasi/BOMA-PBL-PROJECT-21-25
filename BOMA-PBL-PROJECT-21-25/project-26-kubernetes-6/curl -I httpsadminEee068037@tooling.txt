@@ -1,0 +1,14 @@
+curl -I https://admin:Eee068037@tooling.artifactory.bomatooling.xyz/api/docker/sample-docker/v2/
+docker tag 
+
+Tagging format: docker tag <image name>:<image version> <artifactory repo name>/<artifactory repo key>/<image name>:<image version>
+
+Pushing format: docker push <artifactory repo name>/<artifactory repo key>/<image name>:<image version>
+ 
+docker tag alpine:latest tooling.artifactory.bomatooling.xyz/bomasi/alpine:latest
+
+docker push tooling.artifactory.bomatooling.xyz/bomasi/alpine:latest
+
+docker tag jenkins/jenkins:jdk11 tooling.artifactory.bomatooling.xyz/boma-virtual-repo/jenkins/jenkins:jdk11
+
+docker push tooling.artifactory.bomatooling.xyz/boma-virtual-repo/jenkins/jenkins:jdk11

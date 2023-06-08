@@ -1,0 +1,10 @@
+D:\Dare-live-training-git-action
+
+Email - chuksy237@yahoo.com
+Password - Umuhuukpor1
+
+Git token: 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
+
+Base64 encoded: Z2hwXzVGZmpJS2hYeEZQTnNYcnF5TGtQYTM2MVFDOFlNVjFxaFB2TA==
+
+helm upgrade -i jenkins jenkins/jenkins --set-string timestamp=a_random_value -n tools -f jenkins-values-overide.yaml

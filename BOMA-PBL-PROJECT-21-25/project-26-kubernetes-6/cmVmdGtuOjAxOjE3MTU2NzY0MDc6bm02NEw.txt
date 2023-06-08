@@ -1,0 +1,3 @@
+cmVmdGtuOjAxOjE3MTU2NzY0MDc6bm02NEwwZFFPUUFpSU90Y1hlckU5eWxFbU1n
+
+docker push tooling.artifactory.bomatooling.xyz/jenkins/jenkins:jdk11
